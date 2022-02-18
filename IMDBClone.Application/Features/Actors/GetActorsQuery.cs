@@ -1,6 +1,4 @@
-﻿
-
-using imdb_clone_models;
+﻿using imdb_clone_models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
