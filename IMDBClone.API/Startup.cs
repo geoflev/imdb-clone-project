@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 
-namespace IMDB_Clone_API
+namespace IMDBClone.API
 {
     public class Startup
     {

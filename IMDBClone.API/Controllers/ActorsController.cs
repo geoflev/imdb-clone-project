@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace IMDB_Clone_API.Controllers
+namespace IMDBClone.API.Controllers
 {
     [Route("api/actors")]
     public class ActorsController : Controller

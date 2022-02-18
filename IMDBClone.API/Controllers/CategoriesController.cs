@@ -7,7 +7,7 @@ using IMDBClone.Application.Features;
 using System.Threading.Tasks;
 using IMDBClone.Application.Features.Categories;
 
-namespace IMDB_Clone_API.Controllers
+namespace IMDBClone.API.Controllers
 {
     [Route("api/categories")]
     public class CategoriesController : Controller
