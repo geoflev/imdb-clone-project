@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\imdb-clone-models\IMDBClone.Persistence.csproj" />
+    <ProjectReference Include="..\IMDBClone.Persistence\IMDBClone.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

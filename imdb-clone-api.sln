@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IMDB-Clone.API", "IMDB Clone API\IMDB-Clone.API.csproj", "{7E1DC46B-AC80-4054-AE7D-D4F717EAC58A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IMDBClone.Persistence", "imdb-clone-models\IMDBClone.Persistence.csproj", "{DCB1CD20-E1B0-412D-ABFB-9C5CDAEAB70F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IMDBClone.Persistence", "IMDBClone.Persistence\IMDBClone.Persistence.csproj", "{DCB1CD20-E1B0-412D-ABFB-9C5CDAEAB70F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMDBClone.Application", "IMDBClone.Application\IMDBClone.Application.csproj", "{8F9F5FCF-11C0-41D9-B310-1A12047248E9}"
 	ProjectSection(ProjectDependencies) = postProject
