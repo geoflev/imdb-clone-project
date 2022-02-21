@@ -21,7 +21,7 @@ namespace imdb_clone_models.Configurations
             builder
                 .HasMany(x => x.Movies)
                 .WithOne(x => x.Category)
-                .HasForeignKey(x => x.MovieId)
+                .HasForeignKey(x => x.CategoryId)
                 .IsRequired(true)
                 .OnDelete(DeleteBehavior.Restrict);
 

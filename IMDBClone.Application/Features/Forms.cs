@@ -15,4 +15,20 @@ namespace IMDBClone.Application.Features
         string Bio,
         int ActingScore
     );
+
+    public record MovieForm(
+        string Name,
+        string Description,
+        string[] Tags,
+        double Budget,
+        int Duration,
+        DateTime ReleaseDate,
+        string[] ExternalIds,
+        MovieCategoryForm[] Categories
+    );
+
+    public record MovieCategoryForm(
+        string Id,
+        string Value
+    );
 }

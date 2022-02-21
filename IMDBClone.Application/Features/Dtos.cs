@@ -27,7 +27,13 @@ namespace IMDBClone.Application.Features
         double Budget,
         int Duration,
         DateTime ReleaseDate,
-        string[] ExternalIds
+        string[] ExternalIds,
+        MovieCategoryDto[] Categories
+        );
+
+    public record MovieCategoryDto(
+           string Id,
+           string Value
         );
 
     public record MovieLiteDto(

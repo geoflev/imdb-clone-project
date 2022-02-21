@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Movies\" />
     <Folder Include="Features\Producers\" />
   </ItemGroup>
 

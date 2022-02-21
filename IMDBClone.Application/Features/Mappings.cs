@@ -14,7 +14,7 @@ namespace IMDBClone.Application.Features
                   entity.Name);
         }
 
-   
+
 
         public static ActorDto ToDto(this ActorEntity entity)
         {
@@ -27,6 +27,44 @@ namespace IMDBClone.Application.Features
                   entity.Bio,
                   entity.ActingScore
                   );
+        }
+
+        public static MovieDto ToDto(this MovieEntity entity)
+        {
+            return new MovieDto(
+                  entity.Id,
+                  entity.Name,
+                  entity.Description,
+                  entity.Tags,
+                  entity.Budget,
+                  entity.Duration,
+                  entity.ReleaseDate,
+                  entity.ExternalIds,
+                  entity.Categories.Select(category => new MovieCategoryDto(category.CategoryId.ToString(), category.CategoryId.ToString())).ToArray()
+                  /*entity.RelatedMovies,
+                  entity.Categories,
+                  entity.Actors,
+                  entity.Producers,
+                  entity.Posters,
+                  entity.Backdrops,
+                  entity.Videos*/
+                  );
+        }
+
+        public static MovieEntity FromDto(this MovieEntity entity, MovieForm form)
+        {
+            entity.Name = form.Name;
+            entity.Description = form.Description;
+            entity.Tags = form.Tags;
+            entity.Budget = form.Budget;
+            entity.Duration = form.Duration;
+            entity.ReleaseDate = form.ReleaseDate;
+            entity.ExternalIds = form.ExternalIds;
+            entity.Categories = form.Categories.Select(category => new MovieCategoriesEntity
+            {
+                CategoryId = Int32.Parse(category.Id)
+            }).ToList();
+            return entity;
         }
 
         public static CategoryEntity FromDto(this CategoryEntity entity, CategoryForm form)

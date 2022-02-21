@@ -10,8 +10,8 @@ using imdb_clone_models;
 namespace imdb_clone_models.Migrations
 {
     [DbContext(typeof(ImdbCloneDbContext))]
-    [Migration("20220217150740_testingForFile")]
-    partial class testingForFile
+    [Migration("20220221133619_1.0.0.0")]
+    partial class _1000
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,16 +28,11 @@ namespace imdb_clone_models.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
 
                     b.ToTable("Categories");
                 });
@@ -154,6 +149,21 @@ namespace imdb_clone_models.Migrations
                     b.ToTable("ActorMovies");
                 });
 
+            modelBuilder.Entity("imdb_clone_models.Entities.MovieCategoriesEntity", b =>
+                {
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MovieId", "CategoryId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("MovieCategories");
+                });
+
             modelBuilder.Entity("imdb_clone_models.Entities.ProducerEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -200,16 +210,6 @@ namespace imdb_clone_models.Migrations
                     b.HasIndex("ProducerId");
 
                     b.ToTable("ProducerMovies");
-                });
-
-            modelBuilder.Entity("IMDBClone.Persistence.Entities.CategoryEntity", b =>
-                {
-                    b.HasOne("IMDBClone.Persistence.Entities.MovieEntity", "Movie")
-                        .WithMany("Categories")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("IMDBClone.Persistence.Entities.FileEntity", b =>
@@ -264,6 +264,24 @@ namespace imdb_clone_models.Migrations
                     b.Navigation("Movie");
                 });
 
+            modelBuilder.Entity("imdb_clone_models.Entities.MovieCategoriesEntity", b =>
+                {
+                    b.HasOne("IMDBClone.Persistence.Entities.CategoryEntity", "Category")
+                        .WithMany("Movies")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("IMDBClone.Persistence.Entities.MovieEntity", "Movie")
+                        .WithMany("Categories")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Movie");
+                });
+
             modelBuilder.Entity("imdb_clone_models.Entities.ProducerMoviesEntity", b =>
                 {
                     b.HasOne("IMDBClone.Persistence.Entities.MovieEntity", "Movie")
@@ -281,6 +299,11 @@ namespace imdb_clone_models.Migrations
                     b.Navigation("Movie");
 
                     b.Navigation("Producer");
+                });
+
+            modelBuilder.Entity("IMDBClone.Persistence.Entities.CategoryEntity", b =>
+                {
+                    b.Navigation("Movies");
                 });
 
             modelBuilder.Entity("IMDBClone.Persistence.Entities.MovieEntity", b =>

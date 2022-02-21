@@ -52,6 +52,13 @@ namespace imdb_clone_models.Configurations
                 : idsStr.Split(',', StringSplitOptions.RemoveEmptyEntries));
 
             builder
+                .HasMany(x => x.Categories)
+                .WithOne(x => x.Movie)
+                .HasForeignKey(x => x.MovieId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder
                 .HasMany(x => x.Posters)
                 .WithOne()
                 .HasForeignKey(x => x.Id)

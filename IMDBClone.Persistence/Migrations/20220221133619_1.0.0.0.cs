@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace imdb_clone_models.Migrations
 {
-    public partial class test : Migration
+    public partial class _1000 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,6 +23,19 @@ namespace imdb_clone_models.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Actors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,19 +107,23 @@ namespace imdb_clone_models.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
+                name: "MovieCategories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     MovieId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.PrimaryKey("PK_MovieCategories", x => new { x.MovieId, x.CategoryId });
                     table.ForeignKey(
-                        name: "FK_Categories_Movies_MovieId",
+                        name: "FK_MovieCategories_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MovieCategories_Movies_MovieId",
                         column: x => x.MovieId,
                         principalTable: "Movies",
                         principalColumn: "Id",
@@ -126,6 +143,12 @@ namespace imdb_clone_models.Migrations
                 {
                     table.PrimaryKey("PK_Files", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Files_Actors_Id",
+                        column: x => x.Id,
+                        principalTable: "Actors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Files_Movies_Id",
                         column: x => x.Id,
                         principalTable: "Movies",
@@ -141,6 +164,12 @@ namespace imdb_clone_models.Migrations
                         name: "FK_Files_Movies_MovieEntityId1",
                         column: x => x.MovieEntityId1,
                         principalTable: "Movies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Files_Producers_Id",
+                        column: x => x.Id,
+                        principalTable: "Producers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -175,11 +204,6 @@ namespace imdb_clone_models.Migrations
                 column: "ActorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_MovieId",
-                table: "Categories",
-                column: "MovieId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Files_MovieEntityId",
                 table: "Files",
                 column: "MovieEntityId");
@@ -188,6 +212,11 @@ namespace imdb_clone_models.Migrations
                 name: "IX_Files_MovieEntityId1",
                 table: "Files",
                 column: "MovieEntityId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MovieCategories_CategoryId",
+                table: "MovieCategories",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Movies_MovieEntityId",
@@ -206,16 +235,19 @@ namespace imdb_clone_models.Migrations
                 name: "ActorMovies");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Files");
 
             migrationBuilder.DropTable(
-                name: "Files");
+                name: "MovieCategories");
 
             migrationBuilder.DropTable(
                 name: "ProducerMovies");
 
             migrationBuilder.DropTable(
                 name: "Actors");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Movies");

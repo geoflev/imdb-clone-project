@@ -273,8 +273,7 @@ namespace imdb_clone_models.Migrations
                     b.HasOne("IMDBClone.Persistence.Entities.MovieEntity", "Movie")
                         .WithMany("Categories")
                         .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Category");
 
