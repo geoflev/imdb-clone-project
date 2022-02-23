@@ -21,10 +21,9 @@ namespace imdb_clone_models.Migrations
 
             modelBuilder.Entity("IMDBClone.Persistence.Entities.CategoryEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -37,19 +36,19 @@ namespace imdb_clone_models.Migrations
 
             modelBuilder.Entity("IMDBClone.Persistence.Entities.FileEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("MediaType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MovieEntityId")
-                        .HasColumnType("int");
+                    b.Property<string>("MovieEntityId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("MovieEntityId1")
-                        .HasColumnType("int");
+                    b.Property<string>("MovieEntityId1")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -62,10 +61,9 @@ namespace imdb_clone_models.Migrations
 
             modelBuilder.Entity("IMDBClone.Persistence.Entities.MovieEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("Budget")
                         .HasColumnType("float");
@@ -79,8 +77,8 @@ namespace imdb_clone_models.Migrations
                     b.Property<string>("ExternalIds")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MovieEntityId")
-                        .HasColumnType("int");
+                    b.Property<string>("MovieEntityId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -101,10 +99,9 @@ namespace imdb_clone_models.Migrations
 
             modelBuilder.Entity("imdb_clone_models.Entities.ActorEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ActingScore")
                         .HasColumnType("int");
@@ -134,11 +131,11 @@ namespace imdb_clone_models.Migrations
 
             modelBuilder.Entity("imdb_clone_models.Entities.ActorMoviesEntity", b =>
                 {
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
+                    b.Property<string>("MovieId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("ActorId")
-                        .HasColumnType("int");
+                    b.Property<string>("ActorId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("MovieId", "ActorId");
 
@@ -149,11 +146,11 @@ namespace imdb_clone_models.Migrations
 
             modelBuilder.Entity("imdb_clone_models.Entities.MovieCategoriesEntity", b =>
                 {
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
+                    b.Property<string>("MovieId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<string>("CategoryId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("MovieId", "CategoryId");
 
@@ -164,10 +161,9 @@ namespace imdb_clone_models.Migrations
 
             modelBuilder.Entity("imdb_clone_models.Entities.ProducerEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Bio")
                         .HasColumnType("nvarchar(max)");
@@ -197,11 +193,11 @@ namespace imdb_clone_models.Migrations
 
             modelBuilder.Entity("imdb_clone_models.Entities.ProducerMoviesEntity", b =>
                 {
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
+                    b.Property<string>("MovieId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("ProducerId")
-                        .HasColumnType("int");
+                    b.Property<string>("ProducerId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("MovieId", "ProducerId");
 
@@ -273,7 +269,7 @@ namespace imdb_clone_models.Migrations
                     b.HasOne("IMDBClone.Persistence.Entities.MovieEntity", "Movie")
                         .WithMany("Categories")
                         .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Category");
 

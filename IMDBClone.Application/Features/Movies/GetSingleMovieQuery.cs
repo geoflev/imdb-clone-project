@@ -22,7 +22,7 @@ namespace IMDBClone.Application.Features.Movies
             var entity = await Context
                 .Movies
                 .Include(x => x.Categories)
-                .FirstOrDefaultAsync(x => x.Id.ToString() == request.movieId)
+                .FirstOrDefaultAsync(x => x.Id == request.movieId)
                 ?? throw new ArgumentException("Movie not found.");
 
             return entity.ToDto();

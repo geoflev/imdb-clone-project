@@ -22,7 +22,7 @@ namespace IMDBClone.Application.Features.Movies
             var entity = await Context
                 .Movies
                 .Include(x => x.Categories)
-                .FirstOrDefaultAsync(x => x.Id == Int32.Parse(request.MovieId))
+                .FirstOrDefaultAsync(x => x.Id == request.MovieId)
                 ?? throw new ArgumentNullException("Movie was not found");
 
             Context.Movies.Remove(entity);

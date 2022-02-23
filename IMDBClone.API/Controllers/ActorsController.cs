@@ -47,7 +47,7 @@ namespace IMDBClone.API.Controllers
         [HttpPut("{actorId}")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ActorDto))]
         public async Task<IActionResult> UpdateActor(
-            [FromRoute] string actorId, 
+            [FromRoute] string actorId,
             [FromBody] ActorForm form)
         {
             var actor = await Mediator.Send(new UpdateActorCommand(actorId, form));

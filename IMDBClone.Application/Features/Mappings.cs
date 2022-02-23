@@ -29,6 +29,19 @@ namespace IMDBClone.Application.Features
                   );
         }
 
+        public static ProducerDto ToDto(this ProducerEntity entity)
+        {
+            return new ProducerDto(
+                  entity.Id,
+                  entity.FirstName,
+                  entity.LastName,
+                  entity.BirthDate,
+                  entity.Gender,
+                  entity.Bio,
+                  entity.ProducerScore
+                  );
+        }
+
         public static MovieDto ToDto(this MovieEntity entity)
         {
             return new MovieDto(
@@ -41,13 +54,6 @@ namespace IMDBClone.Application.Features
                   entity.ReleaseDate,
                   entity.ExternalIds,
                   entity.Categories.Select(category => new MovieCategoryDto(category.CategoryId.ToString(), category.CategoryId.ToString())).ToArray()
-                  /*entity.RelatedMovies,
-                  entity.Categories,
-                  entity.Actors,
-                  entity.Producers,
-                  entity.Posters,
-                  entity.Backdrops,
-                  entity.Videos*/
                   );
         }
 
@@ -62,7 +68,7 @@ namespace IMDBClone.Application.Features
             entity.ExternalIds = form.ExternalIds;
             entity.Categories = form.Categories.Select(category => new MovieCategoriesEntity
             {
-                CategoryId = Int32.Parse(category.Id)
+                CategoryId = category.Id
             }).ToList();
             return entity;
         }
@@ -79,6 +85,17 @@ namespace IMDBClone.Application.Features
             entity.LastName = form.LastName;
             entity.BirthDate = form.BirthDate;
             entity.ActingScore = form.ActingScore;
+            entity.Bio = form.Bio;
+            entity.Gender = form.Gender;
+            return entity;
+        }
+
+        public static ProducerEntity FromDto(this ProducerEntity entity, ProducerForm form)
+        {
+            entity.FirstName = form.FirstName;
+            entity.LastName = form.LastName;
+            entity.BirthDate = form.BirthDate;
+            entity.ProducerScore = form.ProducerScore;
             entity.Bio = form.Bio;
             entity.Gender = form.Gender;
             return entity;

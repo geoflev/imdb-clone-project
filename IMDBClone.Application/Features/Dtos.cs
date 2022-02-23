@@ -4,12 +4,12 @@ using System;
 namespace IMDBClone.Application.Features
 {
     public record CategoryDto(
-        int Id,
+        string Id,
         string Name
     );
 
     public record ActorDto(
-        int Id,
+        string Id,
         string FirstName,
         string LastName,
         DateTime BirthDate,
@@ -18,9 +18,19 @@ namespace IMDBClone.Application.Features
         int ActingScore
     );
 
+    public record ProducerDto(
+        string Id,
+        string FirstName,
+        string LastName,
+        DateTime BirthDate,
+        Gender Gender,
+        string Bio,
+        int ProducerScore
+    );
+
     //TODO
     public record MovieDto(
-        int Id,
+        string Id,
         string Name,
         string Description,
         string[] Tags,
@@ -37,7 +47,7 @@ namespace IMDBClone.Application.Features
         );
 
     public record MovieLiteDto(
-        int Id,
+        string Id,
         string Name,
         string Description,
         double Budget,

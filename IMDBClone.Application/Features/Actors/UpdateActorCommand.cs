@@ -29,7 +29,7 @@ namespace IMDBClone.Application.Features.Actors
 
             var entity = await Context
                 .Actors
-                .FirstOrDefaultAsync(x => x.Id == Int32.Parse(request.ActorId))
+                .FirstOrDefaultAsync(x => x.Id == request.ActorId)
                 ?? throw new ArgumentException("Actor doens't exist.");
 
             entity = entity.FromDto(request.form);

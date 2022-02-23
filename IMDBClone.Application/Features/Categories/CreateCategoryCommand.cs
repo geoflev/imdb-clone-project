@@ -13,12 +13,10 @@ namespace IMDBClone.Application.Features.Categories
     public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, CategoryDto>
     {
         public ImdbCloneDbContext Context { get; }
-        public IMediator Mediator { get; }
 
-        public CreateCategoryCommandHandler(ImdbCloneDbContext context, IMediator mediator)
+        public CreateCategoryCommandHandler(ImdbCloneDbContext context)
         {
             Context = context ?? throw new ArgumentNullException(nameof(context));
-            Mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
         public async Task<CategoryDto> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)

@@ -12,7 +12,7 @@ namespace IMDBClone.Application.Features.Actors
     public class CreateActorCommandHandler : IRequestHandler<CreateActorCommand, ActorDto>
     {
         public ImdbCloneDbContext Context { get; }
-    
+
         public IMediator Mediator { get; }
 
         public CreateActorCommandHandler(ImdbCloneDbContext context, IMediator mediator)
@@ -30,5 +30,5 @@ namespace IMDBClone.Application.Features.Actors
             return actor.ToDto();
         }
     }
-    
+
 }

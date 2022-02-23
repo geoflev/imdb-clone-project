@@ -24,7 +24,7 @@ namespace IMDBClone.Application.Features.Movies
         {
             var entity = await Context
                 .Movies
-                .FirstOrDefaultAsync(x => x.Id == Int32.Parse(request.MovieId))
+                .FirstOrDefaultAsync(x => x.Id == request.MovieId)
                 ?? throw new ArgumentException("Movie was not found!");
 
             entity = entity.FromDto(request.Form);

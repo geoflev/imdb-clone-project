@@ -16,6 +16,15 @@ namespace IMDBClone.Application.Features
         int ActingScore
     );
 
+    public record ProducerForm(
+        string FirstName,
+        string LastName,
+        DateTime BirthDate,
+        Gender Gender,
+        string Bio,
+        int ProducerScore
+    );
+
     public record MovieForm(
         string Name,
         string Description,

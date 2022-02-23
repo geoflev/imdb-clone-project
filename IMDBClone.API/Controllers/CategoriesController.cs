@@ -27,12 +27,36 @@ namespace IMDBClone.API.Controllers
             return Ok(categories);
         }
 
+        [HttpGet("{categoryId}")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(CategoryDto))]
+        public async Task<IActionResult> GetSingleCategory([FromRoute] string categoryId)
+        {
+            var category = await Mediator.Send(new GetSingleCategoryQuery(categoryId));
+            return Ok(category);
+        }
+
         [HttpPost()]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(CategoryDto))]
         public async Task<IActionResult> CreateCategory([FromBody] CategoryForm form)
         {
             var category = await Mediator.Send(new CreateCategoryCommand(form));
             return Ok(category);
+        }
+
+        [HttpPut("{categoryId}")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(CategoryDto))]
+        public async Task<IActionResult> UpdateCategory([FromRoute] string categoryId, [FromBody] CategoryForm form)
+        {
+            var category = await Mediator.Send(new UpdateCategoryCommand(categoryId, form));
+            return Ok(category);
+        }
+
+        [HttpDelete("{categoryId}")]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> DeleteCategory([FromRoute] string categoryId)
+        {
+            await Mediator.Send(new DeleteCategoryCommand(categoryId));
+            return NoContent();
         }
     }
 }
