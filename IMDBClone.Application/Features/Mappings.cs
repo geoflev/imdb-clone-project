@@ -14,8 +14,6 @@ namespace IMDBClone.Application.Features
                   entity.Name);
         }
 
-
-
         public static ActorDto ToDto(this ActorEntity entity)
         {
             return new ActorDto(
@@ -53,7 +51,9 @@ namespace IMDBClone.Application.Features
                   entity.Duration,
                   entity.ReleaseDate,
                   entity.ExternalIds,
-                  entity.Categories.Select(category => new MovieCategoryDto(category.CategoryId.ToString(), category.CategoryId.ToString())).ToArray()
+                  entity.Categories.Select(category => new MovieCategoryDto(category.CategoryId, category.CategoryId)).ToArray(),
+                  entity.Actors.Select(actor => new MovieActorDto(actor.ActorId, actor.ActorId)).ToArray(),
+                  entity.Producers.Select(producer => new MovieProducerDto(producer.ProducerId, producer.ProducerId)).ToArray()
                   );
         }
 
@@ -69,6 +69,14 @@ namespace IMDBClone.Application.Features
             entity.Categories = form.Categories.Select(category => new MovieCategoriesEntity
             {
                 CategoryId = category.Id
+            }).ToList();
+            entity.Actors = form.Actors.Select(actor => new ActorMoviesEntity
+            {
+                ActorId = actor.Id
+            }).ToList();
+            entity.Producers = form.Producers.Select(prod => new ProducerMoviesEntity
+            {
+                ProducerId = prod.Id
             }).ToList();
             return entity;
         }

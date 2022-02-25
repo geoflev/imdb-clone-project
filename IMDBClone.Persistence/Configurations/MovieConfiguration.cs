@@ -59,6 +59,20 @@ namespace imdb_clone_models.Configurations
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder
+                .HasMany(x => x.Actors)
+                .WithOne(x => x.Movie)
+                .HasForeignKey(x => x.MovieId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder
+                .HasMany(x => x.Producers)
+                .WithOne(x => x.Movie)
+                .HasForeignKey(x => x.MovieId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder
                 .HasMany(x => x.Posters)
                 .WithOne()
                 .HasForeignKey(x => x.Id)

@@ -28,6 +28,8 @@ namespace IMDBClone.Application.Features.Movies
                 .Movies
                 .AsNoTracking()
                 .Include(x => x.Categories)
+                .Include(x => x.Actors)
+                .Include(x => x.Producers)
                 .ToListAsync();
 
             return entities.Select(x => x.ToDto());

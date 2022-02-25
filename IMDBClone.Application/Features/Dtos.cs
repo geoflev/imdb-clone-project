@@ -38,13 +38,25 @@ namespace IMDBClone.Application.Features
         int Duration,
         DateTime ReleaseDate,
         string[] ExternalIds,
-        MovieCategoryDto[] Categories
+        MovieCategoryDto[] Categories,
+        MovieActorDto[] Actors,
+        MovieProducerDto[] Producers
         );
 
     public record MovieCategoryDto(
            string Id,
            string Value
-        );
+    );
+
+    public record MovieActorDto(
+           string Id,
+           string Value
+    );
+
+    public record MovieProducerDto(
+          string Id,
+          string Value
+   );
 
     public record MovieLiteDto(
         string Id,

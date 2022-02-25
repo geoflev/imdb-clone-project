@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using imdb_clone_models;
 
 namespace imdb_clone_models.Migrations
 {
     [DbContext(typeof(ImdbCloneDbContext))]
-    partial class ImdbCloneDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220224101528_cascadeDeleteToActors")]
+    partial class cascadeDeleteToActors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
