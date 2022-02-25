@@ -1,0 +1,6 @@
+<div *ngFor="let movie of movies">
+    <app-card-link [item]="movie"
+                   [content]="content"
+                   (selected)="onSelect($event)">
+    </app-card-link>
+</div>

@@ -1,3 +1,4 @@
+using IMDB_Clone_API.Configurations;
 using imdb_clone_models;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 
 
@@ -24,15 +26,19 @@ namespace IMDBClone.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMediatR(typeof(IMDBClone.Application.Startup));
+            services.AddCors(options => options.AddDefaultPolicy(builder =>
+            {
+                builder.WithOrigins(Configuration.GetSection("AllowedOrigins").Get<string[]>())
+                       .WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                       .AllowAnyHeader()
+                       .WithExposedHeaders(HeaderNames.ContentDisposition);
+            }));
             services.AddControllers();
             services.AddDbContext<ImdbCloneDbContext>(
             options => options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")
                 ));
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "IMDB_Clone_API", Version = "v1" });
-            });
+            services.AddSwaggerConfig();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,11 +48,11 @@ namespace IMDBClone.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "IMDB_Clone_API v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/imdb-clone/swagger.json", "IMDB_Clone_API v1"));
+                
             }
-
             app.UseHttpsRedirection();
-
+            app.UseCors();
             app.UseRouting();
 
             app.UseAuthorization();

@@ -1,0 +1,56 @@
+@use '~@angular/material' as mat;
+
+@include mat.core();
+
+$theme-primary: mat.define-palette(mat.$red-palette, 600);
+$theme-accent: mat.define-palette(mat.$gray-palette, A400);
+$theme-warn: mat.define-palette(mat.$red-palette, 200);
+
+$my-theme: mat.define-light-theme((
+ color: (
+   primary: $theme-primary,
+   accent: $theme-accent,
+   warn: $theme-warn,
+ ),
+ typography: mat.define-typography-config(
+    $font-family: "Inter",
+  )
+));
+
+@include mat.all-component-themes($my-theme);
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import "assets/font-awesome/css/all.min.css";
+// @import "animate.css/animate.css";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+html {
+  height: 100%;
+  body {
+    height: 100%;
+    margin: 0;
+    font-size: 14px;
+
+    .mat-dialog-container {
+      padding: 0;
+      overflow: hidden;
+
+      .mat-dialog-title{
+        margin: 0;
+      }
+
+      .mat-dialog-content {
+        margin: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .mat-dialog-actions {
+        margin: 0;
+        min-height: unset;
+      }
+    }
+  }
+}

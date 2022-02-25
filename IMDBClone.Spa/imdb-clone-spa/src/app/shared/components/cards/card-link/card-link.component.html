@@ -1,0 +1,45 @@
+<a class="
+    transition-all 
+    duration-300 
+    bg-white 
+    shadow-sm 
+    hover:shadow-md 
+    h-80
+    w-60  
+    rounded
+    flex 
+    flex-col 
+    justify-between 
+    group
+    cursor-pointer">
+  <div class="p-4 flex-grow">
+    <h6 class="font-semibold text-gray-800">
+      {{ item.name}}
+    </h6>
+    <div class="text-xs">
+      {{ item.description }}
+    </div>
+  </div>
+  <div class="p-2"
+       style="display: flex; justify-content: space-between;">
+    <div class="p-2">
+      <button mat-button
+            color="accent"
+            class="px-3 py-2 min-w-0 min-h-0 text-xs ml-2 shadow hover:text-red-500"
+            (click)="onSelect()">
+      <span>Details</span>
+    </button>
+    </div>
+    <div class="p-2"
+    style="align-self: center;">
+      <ng-container *ngIf="content">
+        <ng-container [ngTemplateOutlet]="content"
+                      [ngTemplateOutletContext]="context">
+        </ng-container>
+        <!-- <ng-container [ngTemplateOutlet]="content"
+                      [ngTemplateOutletContext]="context">
+        </ng-container> -->
+      </ng-container>
+    </div>
+  </div>
+</a>
