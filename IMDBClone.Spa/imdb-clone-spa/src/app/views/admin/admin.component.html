@@ -1,0 +1,32 @@
+<header class="bg-white p-6">
+    <div class="container mx-auto">
+      <div class="flex items-end justify-between">
+        <div class="flex-grow">
+          <h1 class="text-3xl font-bold flex items-end mb-0">
+            <span class="text-red-500">Imdb</span>
+            <span>.clone</span>
+          </h1>
+        </div>
+        <div class="flex items-center justify-end text-end ms-2">
+          <p class="text-xs mb-0 text-gray-400 hidden sm:block mr-3">
+            <i class="fad fa-copyright mr-1"></i>
+            <span class="font-bold">Geoflev</span>
+            <i class="fas fa-caret-right mx-1"></i>
+            <!-- <span *ngIf="username">{{ username | uppercase }}</span> -->
+          </p>
+          <!-- <button mat-icon-button (click)="onLogout()">
+            <i class="fad text-lg fa-power-off text-red-600"></i>
+          </button> -->
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="p-6">
+    <div class="container mx-auto">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+  <footer class="container mx-auto">
+    <div class="container mx-auto">
+    </div>
+  </footer>

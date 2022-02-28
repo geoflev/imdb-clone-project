@@ -1,9 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ImdbClient, MovieDto } from 'src/app/shared/services/ImdbClient';
-import { ModelsService } from 'src/app/shared/services/models.service';
 import { finalize } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
 import { IIdentifiableModel } from 'src/app/shared/models/group.models';
 
 @Component({
@@ -21,10 +18,7 @@ export class MoviesComponent<TModel extends IIdentifiableModel> implements OnIni
   @Output() selected = new EventEmitter<TModel>();
 
   constructor(
-    private client: ImdbClient,
-    private modelsService: ModelsService,
-    private route: ActivatedRoute,
-    private router: Router) { }
+    private client: ImdbClient) { }
 
   ngOnInit(): void {
 
@@ -33,7 +27,6 @@ export class MoviesComponent<TModel extends IIdentifiableModel> implements OnIni
     ).subscribe(response => {
       this.movies = response;
       this.onMoviesChanged();
-      console.log(this.items)
     })
   }
 

@@ -10,12 +10,16 @@ import { MoviesComponent } from './views/admin/movies/movies.component';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { API_BASE_URL } from './shared/services/ImdbClient';
+import { AdminComponent } from './views/admin/admin.component';
+import { FeaturesComponent } from './views/admin/features/features.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    MoviesComponent
+    MoviesComponent,
+    AdminComponent,
+    FeaturesComponent
   ],
   imports: [
     BrowserModule,
