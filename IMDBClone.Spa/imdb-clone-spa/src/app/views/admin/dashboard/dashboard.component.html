@@ -1,0 +1,28 @@
+<div class="py-5">
+    <div class="container mx-auto p-6">
+      <h5 class="mb-3 text-gray-600">
+        <i class="fad text-gray-900 fa-check-double mr-3"></i>
+        <span>EXPLORE OUR KEY FEATURES</span>
+      </h5>
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-12 lg:col-span-6"
+          *ngFor="let feature of features">
+          <div class="col-span-12 md:col-span-6">
+            <div
+              class="bg-white shadow-sm border-none h-full cursor-pointer"
+              routerLink="../{{feature.title.toLocaleLowerCase()}}">
+              <div class="px-6 py-10 md:py-20 flex items-center justify-center">
+                <div class="text-center">
+                  <i class="fad block fa-folders text-red-600 fa-5x"></i>
+                  <span class="block font-bold text-red-600 mt-4">
+                    {{feature.title}}
+                    <i class="fad fa-arrow-alt-circle-right"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

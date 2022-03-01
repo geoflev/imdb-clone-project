@@ -6,20 +6,22 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './views/public/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
-import { MoviesComponent } from './views/admin/movies/movies.component';
+import { MovieCardComponent } from './views/public/movie-card/movie-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { API_BASE_URL } from './shared/services/ImdbClient';
 import { AdminComponent } from './views/admin/admin.component';
-import { FeaturesComponent } from './views/admin/features/features.component';
+import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
+import { MoviesComponent } from './views/admin/movies/movies.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    MoviesComponent,
+    MovieCardComponent,
     AdminComponent,
-    FeaturesComponent
+    DashboardComponent,
+    MoviesComponent
   ],
   imports: [
     BrowserModule,

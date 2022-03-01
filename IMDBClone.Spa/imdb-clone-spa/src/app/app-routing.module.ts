@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './views/admin/admin.component';
-import { FeaturesComponent } from './views/admin/features/features.component';
+import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
+import { MoviesComponent } from './views/admin/movies/movies.component';
 import { HomeComponent } from './views/public/home/home.component';
 
 const routes: Routes = [
@@ -19,8 +20,12 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'features',
-        component: FeaturesComponent
+        path: 'dashboard',
+        component: DashboardComponent
+      },
+      {
+        path: 'movies',
+        component: MoviesComponent
       }
     ]
   }

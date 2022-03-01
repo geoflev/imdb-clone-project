@@ -1,0 +1,12 @@
+<div class="
+      grid 
+      grid-flow-row 
+      grid-cols-3
+      gap-5">
+    <div *ngFor="let movie of movies">
+        <app-card-link [item]="movie"
+                       [content]="content"
+                       (selected)="onSelect($event)">
+        </app-card-link>
+    </div>
+</div>

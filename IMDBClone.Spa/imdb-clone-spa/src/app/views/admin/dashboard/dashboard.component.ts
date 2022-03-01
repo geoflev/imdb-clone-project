@@ -9,10 +9,10 @@ export interface IFeature {
 
 @Component({
   selector: 'app-features',
-  templateUrl: './features.component.html',
-  styleUrls: ['./features.component.scss']
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
-export class FeaturesComponent<TModel extends IIdentifiableModel> implements OnInit {
+export class DashboardComponent<TModel extends IIdentifiableModel> implements OnInit {
 
     @Output() selected = new EventEmitter<TModel>();
     features: IFeature[] = [

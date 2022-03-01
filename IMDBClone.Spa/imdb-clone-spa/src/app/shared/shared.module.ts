@@ -20,6 +20,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatTableModule} from '@angular/material/table';
 
 //TODO
 export const MATERIAL_ELEMENTS = [
@@ -39,7 +40,8 @@ export const MATERIAL_ELEMENTS = [
     MatSlideToggleModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTableModule
   ];
   
   export const APP_ELEMENTS = [
