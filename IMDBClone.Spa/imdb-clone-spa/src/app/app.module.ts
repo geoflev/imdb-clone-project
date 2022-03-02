@@ -13,6 +13,8 @@ import { API_BASE_URL } from './shared/services/ImdbClient';
 import { AdminComponent } from './views/admin/admin.component';
 import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
 import { MoviesComponent } from './views/admin/movies/movies.component';
+import { MovieFormComponent } from './views/admin/movies/movie-form/movie-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { MoviesComponent } from './views/admin/movies/movies.component';
     MovieCardComponent,
     AdminComponent,
     DashboardComponent,
-    MoviesComponent
+    MoviesComponent,
+    MovieFormComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +32,8 @@ import { MoviesComponent } from './views/admin/movies/movies.component';
     BrowserAnimationsModule,
     SharedModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     {

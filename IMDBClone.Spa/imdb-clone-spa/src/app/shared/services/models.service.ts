@@ -16,4 +16,12 @@ export class ModelsService {
 
     private actorDeletedSubject = new Subject<string>();
     public actorDeleted$ = this.actorDeletedSubject.asObservable();
+
+    public movieSaved(movie: MovieDto): void {
+        this.movieSavedSubject.next(movie);
+      }
+    
+      public movieDeleted(movieId: string): void {
+        this.movieDeletedSubject.next(movieId);
+      }
 }

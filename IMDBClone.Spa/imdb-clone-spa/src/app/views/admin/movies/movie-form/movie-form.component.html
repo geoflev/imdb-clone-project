@@ -1,0 +1,128 @@
+<app-form header="Movie"
+          [new]="new"
+          [loading]="loading"
+          [formValid]="formElement.valid"
+          (form)="(form)"
+          (cancel)="onClose()"
+          (create)="onCreate()"
+          (update)="onUpdate()">
+    <form #formElement="ngForm">
+        <fieldset [disabled]="loading">
+            <div class="grid grid-flow-row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput
+                           required
+                           name="name"
+                           [(ngModel)]="form.name" />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput
+                              name="description"
+                              rows="3"
+                              [(ngModel)]="form.description"></textarea>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Tags</mat-label>
+                    <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let tag of form.tags"
+                                  [selectable]="false"
+                                  [removable]="isTagRemovable(tag)"
+                                  (removed)="onRemoveTag(tag)">
+                            {{ tag }}
+                            <mat-icon matChipRemove
+                                      *ngIf="isTagRemovable(tag)">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder=""
+                               [matChipInputFor]="chipList"
+                               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                               [matChipInputAddOnBlur]="true"
+                               (matChipInputTokenEnd)="onAddTag($event)" />
+                    </mat-chip-list>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Budget</mat-label>
+                    <input matInput
+                           required
+                           name="name"
+                           [(ngModel)]="form.budget" />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Duration</mat-label>
+                    <input matInput
+                           required
+                           name="name"
+                           [(ngModel)]="form.duration" />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput
+                           [matDatepicker]="picker"
+                           [(ngModel)]="form.releaseDate">
+                    <mat-datepicker-toggle matSuffix
+                                           [for]="picker">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>External IDs</mat-label>
+                    <mat-chip-list #idsChipList>
+                        <mat-chip *ngFor="let ids of form.externalIds"
+                                  [selectable]="false"
+                                  [removable]="isTagRemovable(ids)"
+                                  (removed)="onRemoveTag(ids)">
+                            {{ ids }}
+                            <mat-icon matChipRemove
+                                      *ngIf="isTagRemovable(ids)">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder=""
+                               [matChipInputFor]="idsChipList"
+                               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                               [matChipInputAddOnBlur]="true"
+                               (matChipInputTokenEnd)="onAddTag($event)" />
+                    </mat-chip-list>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Categories</mat-label>
+                    <mat-select [(ngModel)]="form.categories"
+                                [ngModelOptions]="{standalone: true}">
+                        <mat-option *ngFor="let category of categories"
+                                    [value]="category.id">
+                            {{category.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Actors</mat-label>
+                    <mat-select [(ngModel)]="form.actors"
+                                [ngModelOptions]="{standalone: true}">
+                        <mat-option *ngFor="let actor of actors"
+                                    [value]="actor.id">
+                            {{actor.firstName + ' ' + actor.lastName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Producers</mat-label>
+                    <mat-select [(ngModel)]="form.producers"
+                                [ngModelOptions]="{standalone: true}">
+                        <mat-option *ngFor="let prod of producers"
+                                    [value]="prod.id">
+                            {{prod.firstName + ' ' + prod.lastName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </fieldset>
+    </form>
+</app-form>

@@ -4,7 +4,7 @@ import { finalize } from 'rxjs/operators';
 import { IIdentifiableModel } from 'src/app/shared/models/group.models';
 
 @Component({
-  selector: 'app-movies',
+  selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })

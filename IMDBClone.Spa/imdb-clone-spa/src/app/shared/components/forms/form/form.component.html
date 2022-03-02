@@ -1,0 +1,29 @@
+<h1 mat-dialog-title class="text-red-500 text-sm p-6  uppercase">
+    <span>{{ header }}</span>
+    <span class="mx-2">/</span>
+    <span class="text-red-600 font-semibold">
+      <ng-container *ngIf="new;else existTemplate">
+        <span>Create</span>
+      </ng-container>
+      <ng-template #existTemplate>
+        <span>Update</span>
+      </ng-template>
+    </span>
+  </h1>
+  <div mat-dialog-content class="p-6 text-gray-500">
+    <ng-content></ng-content>
+  </div>
+  <div mat-dialog-actions class="justify-end bg-gray-100 p-6">
+    <button mat-button
+            color="primary"
+            [disabled]="loading"
+            (click)="onCancel()">
+      CANCEL
+    </button>
+    <button mat-flat-button
+            color="primary"
+            [disabled]="loading || !formValid"
+            (click)="onSave()">
+      SAVE
+    </button>
+  </div>
