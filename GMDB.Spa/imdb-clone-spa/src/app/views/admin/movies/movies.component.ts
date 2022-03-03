@@ -1,46 +1,61 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { ImdbClient, MovieDto } from 'src/app/shared/services/ImdbClient';
+import { ModelsService } from 'src/app/shared/services/models.service';
 import { MovieFormComponent } from './movie-form/movie-form.component';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+export interface IMovieTableData {
+  name?: string;
+  description?: string;
+  budget?: number;
+  duration?: number;
+  releaseDate?: string;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-  { position: 11, name: 'Neon2', weight: 20.1797, symbol: 'Ne' },
-  { position: 12, name: 'Neon3', weight: 20.1797, symbol: 'Ne' },
-];
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
-
-  @Output() displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  @Output() dataSource = ELEMENT_DATA;
+  loading: boolean = true;
+  splicedData: any;
+  length?= 500;
+  pageSize = 10;
+  pageIndex = 0;
+  pageSizeOptions = [5, 10, 25];
+  showFirstLastButtons = true;
+  displayedColumns: string[] = ['name', 'description', 'budget', 'duration', 'releaseDate'];
+  dataSource: any[] = [];
 
   constructor(
     private dialog: MatDialog,
-    private route: ActivatedRoute,) {
+    private route: ActivatedRoute,
+    private client: ImdbClient,
+    private modelsService: ModelsService) { }
+
+
+  ngOnInit(): void {
+    this.client.getMovies().pipe(
+      finalize(() => this.loading = false)
+    ).subscribe(response => {
+      this.dataSource = response.map(movie => this.transform(movie));
+      this.length = Object.values(this.dataSource!).length;
+      this.splicedData = Object.values(this.dataSource!).slice(((0 + 1) - 1) * this.pageSize).slice(0, this.pageSize);
+      this.displayedColumns = Object.values(this.displayedColumns!)
+    });
 
   }
-  ngOnInit(): void {
 
+  handlePageEvent(event: PageEvent) {
+    this.length = event.length;
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex;
+    const offset = ((event.pageIndex + 1) - 1) * event.pageSize;
+    this.splicedData = Object.values(this.dataSource!).slice(offset).slice(0, event.pageSize);
   }
 
   onCreate(): void {
@@ -52,6 +67,19 @@ export class MoviesComponent implements OnInit {
         movie: undefined,
         route: this.route
       }
-    });
+    }).afterClosed()
+      .subscribe(() => {
+        this.ngOnInit();
+      });
+  }
+
+  transform(movie: MovieDto): IMovieTableData {
+    return {
+      name: movie.name,
+      description: movie.description,
+      budget: movie.budget,
+      duration: movie.duration,
+      releaseDate: movie.releaseDate?.toLocaleDateString()
+    } as IMovieTableData
   }
 }

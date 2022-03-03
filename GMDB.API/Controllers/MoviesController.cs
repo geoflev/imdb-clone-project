@@ -38,7 +38,7 @@ namespace GMDB.API.Controllers
         }
 
         [HttpPost()]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = (typeof(MovieDto)))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = (typeof(MovieDtoLite)))]
         public async Task<IActionResult> CreateMovie([FromBody] MovieForm form)
         {
             var movie = await Mediator.Send(new CreateMovieCommand(form));

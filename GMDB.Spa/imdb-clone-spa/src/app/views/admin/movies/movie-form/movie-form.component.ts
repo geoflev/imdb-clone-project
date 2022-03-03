@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { ImdbClient, MovieDto, MovieForm } from 'src/app/shared/services/ImdbClient';
+import { ImdbClient, MovieDto, MovieDtoLite, MovieForm } from 'src/app/shared/services/ImdbClient';
 import { ModelsService } from 'src/app/shared/services/models.service';
 
 export interface IMovieDialogData {
@@ -37,8 +37,9 @@ export class MovieFormComponent implements OnInit {
     this.form = !this.data.movie
       ? new MovieForm({
           tags: [],
+          externalIds: [],
         })
-      : new MovieForm(this.data.movie);
+      : new MovieForm();
     if (!this.form.tags) {
       this.form.tags = [];
     } 
@@ -63,14 +64,14 @@ export class MovieFormComponent implements OnInit {
     ).subscribe(response => this.saved(response));
   }
 
-  onUpdate(): void {
-    this.loading = true;
-    this.client.updateMovie(this.data.movieId, this.form).pipe(
-      finalize(() => this.loading = false)
-    ).subscribe(response => this.saved(response));
-  }
+  // onUpdate(): void {
+  //   this.loading = true;
+  //   this.client.updateMovie(this.data.movieId, this.form).pipe(
+  //     finalize(() => this.loading = false)
+  //   ).subscribe(response => this.saved(response));
+  // }
 
-  saved(movie: MovieDto): void {
+  saved(movie: MovieDtoLite): void {
     this.modelsService.movieSaved(movie);
     this.onClose(true);
   }

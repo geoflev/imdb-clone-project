@@ -1,11 +1,11 @@
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
-import { ActorDto, MovieDto } from "./ImdbClient";
+import { ActorDto, MovieDto, MovieDtoLite } from "./ImdbClient";
 
 @Injectable({providedIn: 'root'})
 export class ModelsService {
-    private movieSavedSubject = new Subject<MovieDto>();
+    private movieSavedSubject = new Subject<MovieDtoLite>();
     public movieSaved$ = this.movieSavedSubject.asObservable();
 
     private movieDeletedSubject = new Subject<string>();
@@ -17,7 +17,7 @@ export class ModelsService {
     private actorDeletedSubject = new Subject<string>();
     public actorDeleted$ = this.actorDeletedSubject.asObservable();
 
-    public movieSaved(movie: MovieDto): void {
+    public movieSaved(movie: MovieDtoLite): void {
         this.movieSavedSubject.next(movie);
       }
     

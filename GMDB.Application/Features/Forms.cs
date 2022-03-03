@@ -33,23 +33,8 @@ namespace GMDB.Application.Features
         int Duration,
         DateTime ReleaseDate,
         string[] ExternalIds,
-        MovieCategoryForm[] Categories,
-        MovieActorForm[] Actors,
-        MovieProducerForm[] Producers
-    );
-
-    public record MovieActorForm(
-        string Id,
-        string Value
-    );
-
-    public record MovieProducerForm(
-        string Id,
-        string Value
-    );
-
-    public record MovieCategoryForm(
-        string Id,
-        string Value
+        string[] Categories,
+        string[] Actors,
+        string[] Producers
     );
 }

@@ -38,7 +38,7 @@ namespace GMDB.Application.Features
                   );
         }
 
-        public static MovieDto ToDto(this MovieEntity entity)
+        public static MovieDto ToDto (this MovieEntity entity)
         {
             return new MovieDto(
                   entity.Id,
@@ -49,11 +49,29 @@ namespace GMDB.Application.Features
                   entity.Duration,
                   entity.ReleaseDate,
                   entity.ExternalIds,
-                  entity.Categories.Select(category => new MovieCategoryDto(category.CategoryId, category.CategoryId)).ToArray(),
-                  entity.Actors.Select(actor => new MovieActorDto(actor.ActorId, actor.ActorId)).ToArray(),
-                  entity.Producers.Select(producer => new MovieProducerDto(producer.ProducerId, producer.ProducerId)).ToArray()
+                  entity.Categories.Select(category => new MovieCategoryDto(category.CategoryId, category.Category.Name)).ToArray(),
+                  entity.Actors.Select(actor => new MovieActorDto(actor.ActorId, actor.Actor.FirstName, actor.Actor.LastName)).ToArray(),
+                  entity.Producers.Select(producer => new MovieProducerDto(producer.ProducerId, producer.Producer.FirstName, producer.Producer.LastName)).ToArray()
                   );
         }
+
+        public static MovieDtoLite ToDtoLite(this MovieEntity entity)
+        {
+            return new MovieDtoLite(
+                  entity.Id,
+                  entity.Name,
+                  entity.Description,
+                  entity.Tags,
+                  entity.Budget,
+                  entity.Duration,
+                  entity.ReleaseDate,
+                  entity.ExternalIds,
+                  entity.Categories.Select(category => category.CategoryId).ToArray(),
+                  entity.Actors.Select(actor => actor.ActorId).ToArray(),
+                  entity.Producers.Select(producer => producer.ProducerId).ToArray()
+                  );
+        }
+
 
         public static MovieEntity FromDto(this MovieEntity entity, MovieForm form)
         {
@@ -66,15 +84,15 @@ namespace GMDB.Application.Features
             entity.ExternalIds = form.ExternalIds;
             entity.Categories = form.Categories.Select(category => new MovieCategoriesEntity
             {
-                CategoryId = category.Id
+                CategoryId = category
             }).ToList();
             entity.Actors = form.Actors.Select(actor => new ActorMoviesEntity
             {
-                ActorId = actor.Id
+                ActorId = actor
             }).ToList();
             entity.Producers = form.Producers.Select(prod => new ProducerMoviesEntity
             {
-                ProducerId = prod.Id
+                ProducerId = prod
             }).ToList();
             return entity;
         }

@@ -41,21 +41,37 @@ namespace GMDB.Application.Features
         MovieCategoryDto[] Categories,
         MovieActorDto[] Actors,
         MovieProducerDto[] Producers
-        );
+    );
+
+    public record MovieDtoLite(
+        string Id,
+        string Name,
+        string Description,
+        string[] Tags,
+        double Budget,
+        int Duration,
+        DateTime ReleaseDate,
+        string[] ExternalIds,
+        string[] Categories,
+        string[] Actors,
+        string[] Producers
+    );
 
     public record MovieCategoryDto(
            string Id,
-           string Value
+           string Name
     );
 
     public record MovieActorDto(
            string Id,
-           string Value
+           string FirstName,
+           string LastName
     );
 
     public record MovieProducerDto(
           string Id,
-          string Value
+          string FirstName,
+          string LastName
    );
 
     public record MovieLiteDto(

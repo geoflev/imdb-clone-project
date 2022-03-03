@@ -27,8 +27,11 @@ namespace GMDB.Application.Features.Movies
                 .Movies
                 .AsNoTracking()
                 .Include(x => x.Categories)
+                    .ThenInclude(x => x.Category)
                 .Include(x => x.Actors)
+                    .ThenInclude(x => x.Actor)
                 .Include(x => x.Producers)
+                    .ThenInclude(x => x.Producer)
                 .ToListAsync();
 
             return entities.Select(x => x.ToDto());

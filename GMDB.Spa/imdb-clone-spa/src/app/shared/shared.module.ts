@@ -21,7 +21,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTableModule} from '@angular/material/table';
-import { TableComponent } from './components/tables/table/table.component';
 import { FormComponent } from './components/forms/form/form.component';
 
 //TODO
@@ -48,7 +47,6 @@ export const MATERIAL_ELEMENTS = [
   
   export const APP_ELEMENTS = [
     CardLinkComponent,
-    TableComponent,
     FormComponent
   ];
 
