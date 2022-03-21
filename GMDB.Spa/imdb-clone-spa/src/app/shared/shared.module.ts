@@ -22,6 +22,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTableModule} from '@angular/material/table';
 import { FormComponent } from './components/forms/form/form.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 //TODO
 export const MATERIAL_ELEMENTS = [
@@ -42,7 +43,8 @@ export const MATERIAL_ELEMENTS = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatRadioModule
   ];
   
   export const APP_ELEMENTS = [

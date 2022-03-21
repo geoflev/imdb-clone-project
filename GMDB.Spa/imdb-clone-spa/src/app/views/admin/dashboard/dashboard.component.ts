@@ -18,7 +18,8 @@ export class DashboardComponent<TModel extends IIdentifiableModel> implements On
     features: IFeature[] = [
         { icon: 'film', title: 'Movies', description: 'Search movies from a large database' },
         { icon: 'user', title: 'Actors', description: 'Search actors from a large database' },
-        { icon: 'camcorder', title: 'Producers', description: 'Search producers from a large database' }
+        { icon: 'camcorder', title: 'Producers', description: 'Search producers from a large database' },
+        { icon: 'camcorder', title: 'Categories', description: 'Search categories from a large database' },
       ];
 
   constructor() { }

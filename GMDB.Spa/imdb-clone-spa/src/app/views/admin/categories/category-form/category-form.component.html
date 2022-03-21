@@ -1,0 +1,23 @@
+<app-form header="Movie"
+          [new]="new"
+          [loading]="loading"
+          [formValid]="formElement.valid"
+          (form)="(form)"
+          (cancel)="onClose()"
+          (create)="onCreate()"
+          >
+    <form #formElement="ngForm">
+        <fieldset [disabled]="loading">
+            <div class="grid grid-flow-row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput
+                           required
+                           name="name"
+                           [(ngModel)]="form.name" 
+                           [ngModelOptions]="{standalone: true}"/>
+                </mat-form-field>
+            </div>
+        </fieldset>
+    </form>
+</app-form>

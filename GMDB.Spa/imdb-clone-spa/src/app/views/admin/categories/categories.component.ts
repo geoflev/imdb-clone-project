@@ -1,52 +1,49 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/operators';
-import { ImdbClient, MovieDto } from 'src/app/shared/services/ImdbClient';
-import { MovieFormComponent } from './movie-form/movie-form.component';
+import { CategoryDto, ImdbClient } from 'src/app/shared/services/ImdbClient';
+import { CategoryFormComponent } from './category-form/category-form.component';
 
-export interface IMovieTableData {
-  name?: string;
-  description?: string;
-  budget?: number;
-  duration?: number;
-  releaseDate?: string;
+export interface ICategoryData {
+ name: string;   
 }
+
 @Component({
-  selector: 'app-movies',
-  templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.scss']
+  selector: 'app-categories',
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.scss']
 })
-export class MoviesComponent implements OnInit {
+export class CategoriesComponent implements OnInit {
+
   loading: boolean = true;
   splicedData: any;
-  length?= 500;
+  length? = 500;
   pageSize = 10;
   pageIndex = 0;
   pageSizeOptions = [5, 10, 25];
   showFirstLastButtons = true;
-  displayedColumns: string[] = ['name', 'description', 'budget', 'duration', 'releaseDate'];
+  displayColumns: string[] = ['name'];
   dataSource: any[] = [];
 
   constructor(
     private dialog: MatDialog,
     private route: ActivatedRoute,
-    private client: ImdbClient) { }
-
+    private client: ImdbClient
+  ) { }
 
   ngOnInit(): void {
-    this.client.getMovies().pipe(
+    this.client.getCategories().pipe(
       finalize(() => this.loading = false)
     ).subscribe(response => {
-      this.dataSource = response.map(movie => this.transform(movie));
+      this.dataSource = response.map(category => this.transform(category));
       this.length = Object.values(this.dataSource!).length;
       this.splicedData = Object.values(this.dataSource!).slice(((0 + 1) - 1) * this.pageSize).slice(0, this.pageSize);
-      this.displayedColumns = Object.values(this.displayedColumns!)
-    });
-
+      this.displayColumns = Object.values(this.displayColumns);
+    })
   }
-
+  
   handlePageEvent(event: PageEvent) {
     this.length = event.length;
     this.pageSize = event.pageSize;
@@ -56,7 +53,7 @@ export class MoviesComponent implements OnInit {
   }
 
   onCreate(): void {
-    this.dialog.open(MovieFormComponent, {
+    this.dialog.open(CategoryFormComponent, {
       width: '550px',
       disableClose: true,
       hasBackdrop: true,
@@ -70,13 +67,10 @@ export class MoviesComponent implements OnInit {
       });
   }
 
-  transform(movie: MovieDto): IMovieTableData {
+  transform(category: CategoryDto): ICategoryData {
     return {
-      name: movie.name,
-      description: movie.description,
-      budget: movie.budget,
-      duration: movie.duration,
-      releaseDate: movie.releaseDate?.toLocaleDateString()
-    } as IMovieTableData
+      name: category.name
+    } as ICategoryData
   }
+
 }

@@ -15,6 +15,12 @@ import { DashboardComponent } from './views/admin/dashboard/dashboard.component'
 import { MoviesComponent } from './views/admin/movies/movies.component';
 import { MovieFormComponent } from './views/admin/movies/movie-form/movie-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CategoriesComponent } from './views/admin/categories/categories.component';
+import { CategoryFormComponent } from './views/admin/categories/category-form/category-form.component';
+import { ActorsComponent } from './views/admin/actors/actors.component';
+import { ActorsFormComponent } from './views/admin/actors/actors-form/actors-form.component';
+import { ProducersComponent } from './views/admin/producers/producers.component';
+import { ProducersFormComponent } from './views/admin/producers/producers-form/producers-form.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +30,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AdminComponent,
     DashboardComponent,
     MoviesComponent,
-    MovieFormComponent
+    MovieFormComponent,
+    CategoriesComponent,
+    CategoryFormComponent,
+    ActorsComponent,
+    ActorsFormComponent,
+    ProducersComponent,
+    ProducersFormComponent
   ],
   imports: [
     BrowserModule,
